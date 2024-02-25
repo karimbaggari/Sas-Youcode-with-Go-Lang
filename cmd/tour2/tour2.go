@@ -1,27 +1,16 @@
-package tour1
+package tour2
 
-import (
+import(
+	"fmt"
+	"os"
 	"bufio"
-    "fmt"
-    "os"
-  
+	"math"
 )
-
 type Vote struct {
     Elector   string
     President string
 }
-
-func Tour1(presidents,electeurs []string) []string {
-	fmt.Println("Welcome to tour 1. Here are the presidents:")
-    for _, president := range presidents {
-        fmt.Println("-", president)
-    }
-    fmt.Println("Here are the electors allowed to vote:")
-    for _, elector := range electeurs {
-        fmt.Println("-", elector)
-    }
-
+func Tour2(presidents,electeurs []string) {
 	var votes []Vote
 
 	for _, elector := range electeurs {
@@ -64,17 +53,27 @@ func Tour1(presidents,electeurs []string) []string {
         voteCounts[vote.President]++
     }
 
-	 // Calculate the total number of votes
-	 totalVotes := len(votes)
+	 var minVotes int = math.MaxInt64
+	 var leastVotedPresident string
 
-	 var remainingPresidents []string
-	 for president, count := range voteCounts {
-		percentage := float64(count) / float64(totalVotes)
-		if percentage >= 0.15 {
-			remainingPresidents = append(remainingPresidents, president)
-		}
+	 for president, votes := range voteCounts {
+        if votes < minVotes {
+            minVotes = votes
+            leastVotedPresident = president
+        }
 	}
+		if leastVotedPresident != "" {
+			fmt.Printf("The least voted president is %s with %d votes.\n", leastVotedPresident, minVotes)
+		} else {
+			fmt.Println("No votes recorded.")
+		}
+
+		for i, president := range presidents {
+			if president == leastVotedPresident {
+				presidents = append(presidents[:i], presidents[i+1:]...)
+				break
+			}
+		}
 	
-	fmt.Println("Remaining presidents after exclusion:", remainingPresidents)
-    return remainingPresidents
+		fmt.Println("Presidents after excluding the least voted president:", presidents)	
 }

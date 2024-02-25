@@ -4,6 +4,7 @@ import (
     "fmt"
     "os"
 	"learn-go/cmd/tour1"
+	"learn-go/cmd/tour2"
 )
 
 func main() {
@@ -63,5 +64,7 @@ for len(electeurs) < 10 {
 
     fmt.Println("Entered presidents:", presidents)
 	fmt.Println("Entered electeurs:", electeurs)
-	tutorial_1.Tour1(presidents, electeurs)
+	tour1Results := tour1.Tour1(presidents, electeurs)
+	fmt.Println("--------------------------------------------------------" , tour1Results)
+	tour2.Tour2(tour1Results,electeurs)
 }
