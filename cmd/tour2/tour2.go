@@ -10,7 +10,8 @@ type Vote struct {
     Elector   string
     President string
 }
-func Tour2(presidents,electeurs []string) {
+func Tour2(presidents,electeurs []string) []string {
+    fmt.Println("Welcome to tour 2. Let the vote begin")
 	var votes []Vote
 
 	for _, elector := range electeurs {
@@ -74,6 +75,8 @@ func Tour2(presidents,electeurs []string) {
 				break
 			}
 		}
+
 	
-		fmt.Println("Presidents after excluding the least voted president:", presidents)	
+		fmt.Println("Presidents after excluding the least voted president:", presidents)
+        return presidents
 }

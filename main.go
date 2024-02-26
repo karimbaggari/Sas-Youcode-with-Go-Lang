@@ -1,10 +1,12 @@
 package main
+
 import (
 	"bufio"
-    "fmt"
-    "os"
+	"fmt"
 	"learn-go/cmd/tour1"
 	"learn-go/cmd/tour2"
+	"learn-go/cmd/tour3"
+	"os"
 )
 
 func main() {
@@ -66,5 +68,7 @@ for len(electeurs) < 10 {
 	fmt.Println("Entered electeurs:", electeurs)
 	tour1Results := tour1.Tour1(presidents, electeurs)
 	fmt.Println("--------------------------------------------------------" , tour1Results)
-	tour2.Tour2(tour1Results,electeurs)
+	tour2Results := tour2.Tour2(tour1Results,electeurs)
+	fmt.Println("--------------------------------------------------------" , tour2Results)
+	tour3.Tour3(tour2Results,electeurs)
 }
